@@ -117,6 +117,51 @@ body {
   margin-bottom: 0.5rem;
   border-radius: 4px;
 }
+/* ADD/UPDATE THESE RULES */
+.vehicle-detail {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.vehicle-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.vehicle-info h2 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.vehicle-info p {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.vehicle-info strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Price Emphasis */
+.vehicle-info p:nth-of-type(1) { /* Target price line */
+  font-size: 1.5rem;
+  color: #007bff;
+  margin: 1.5rem 0;
+}
+
+/* Mileage Formatting */
+.vehicle-info p:nth-of-type(2) { /* Target mileage line */
+  color: #666;
+}
 
 /* Footer Styles */
 footer {
@@ -124,6 +169,16 @@ footer {
   padding: 2rem;
   background-color: #f8f9fa;
   margin-top: 2rem;
+  /* UPDATE FOOTER STYLES */
+footer a[href="/error-test"] {
+  color: #dc3545;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+footer a[href="/error-test"]:hover {
+  text-decoration: none;
+}
 }
 
 /* Mobile Styles */
