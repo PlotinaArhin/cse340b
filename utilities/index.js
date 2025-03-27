@@ -7,8 +7,7 @@ const Util = {};
 Util.getNav = async function () {
   try {
     const data = await invModel.getClassifications();
-    let list = '<ul>';
-    list += '<li><a href="/" title="Home page">Home</a></li>';
+    let list = '<li><a href="/" title="Home page">Home</a></li>'; // Start with Home
     
     data.rows.forEach((row) => {
       list += `<li>
@@ -19,11 +18,10 @@ Util.getNav = async function () {
       </li>`;
     });
     
-    list += '</ul>';
-    return list;
+    return list; // Returns <li>...</li><li>...</li>
   } catch (error) {
     console.error('Error building navigation:', error);
-    return '<ul><li>Error loading navigation</li></ul>';
+    return '<li>Error loading navigation</li>';
   }
 };
 
