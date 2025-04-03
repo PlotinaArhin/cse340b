@@ -1,43 +1,57 @@
-/* ******************************************
- * This server.js file is the primary file of the 
- * application. It is used to control the project.
- *******************************************/
 /* ***********************
- * Require Statements
+ * Requires Statements
  *************************/
-const express = require("express")
-const expressLayouts = require("express-ejs-layouts")
-const env = require("dotenv").config()
-const app = express()
-const inventoryRoute = require("./routes/inventoryroute")
-const static = require("./routes/static")
-const  baseController = require("./controllers/baseController")
-
-
-/* ***********************
- * View Engine and Templates 
- *************************/
-app.set("view engine", "ejs")
-app.use(expressLayouts)
-app.set("layout", "./layouts/layout") // not at views root
-app.use(static)
- 
-//Index route
-app.get("/", baseController.buildHome)
-// Inventory routes
-app.use("/inv", inventoryRoute)
-
+// Load environment variables from .env file
+require('dotenv').config();
+// Import the Express framework
+const express = require("express");
+// Import path module for working with file and directory paths
+const path = require("path");
+// Import express-ejs-layouts for layout support
+const expressLayouts = require("express-ejs-layouts");
+// Create an Express application instance
+const app = express();
+// Import base controller (assuming you might have one later, or define routes directly)
+// For this basic example, we'll define the route directly in server.js
+// const baseController = require("./controllers/baseController") // Example if using controllers
 
 /* ***********************
- * Local Server Information
- * Values from .env (environment) file
+ * View Engine and Templates
  *************************/
-const port = process.env.PORT
-const host = process.env.HOST
+// Set EJS as the view engine
+app.set("view engine", "ejs");
+// Use express-ejs-layouts middleware
+app.use(expressLayouts);
+// Set the default layout file
+app.set("layout", "./layouts/layout"); // assumes you have a layout file at views/layouts/layout.ejs
+// Set the directory for view templates
+app.set("views", path.join(__dirname, "views"));
 
 /* ***********************
- * Log statement to confirm server operation
+ * Middleware
  *************************/
+// Serve static files (CSS, images, etc.) from the 'public' directory
+app.use(express.static(path.join(__dirname, "public")));
+
+/* ***********************
+ * Routes
+ *************************/
+// Route for the home page
+app.get("/", function(req, res){
+  // Render the index view
+  // The actual rendering might be handled by a controller in a larger app
+  // res.render("index", {title: "Home"}) // Example if passing data
+  res.render("index", { title: "Home", nav: [] }); // Pass an empty nav array or fetch dynamically if needed
+});
+
+/* ***********************
+ * Server Activation
+ *************************/
+// Define the port the server will listen on.
+// It will use the PORT from the .env file if available, otherwise default to 3000.
+const port = process.env.PORT || 3000;
+// Start the server and listen on the specified port
 app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
-})
+  console.log(`App listening on port ${port}`);
+});
+
