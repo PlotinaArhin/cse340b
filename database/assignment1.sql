@@ -1,1 +1,0 @@
-SELECT * FROM  pg_tables WHERE schemaname = 'public';
