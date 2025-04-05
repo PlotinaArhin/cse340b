@@ -1,0 +1,15 @@
+<%# Content for the Vehicle Detail View %>
+
+<% if (errors && errors.length > 0) { %>
+  <ul class="notice">
+  <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+  <%  }) %>
+  </ul>
+<% } %>
+
+<%# The detailGrid variable holds the HTML built by the utility function %>
+<%- detailGrid %>
+
+<%# Add any other specific content for the detail page if needed %>
+

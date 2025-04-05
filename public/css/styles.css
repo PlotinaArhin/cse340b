@@ -249,6 +249,73 @@ footer {
   color: #6c757d; /* Lighter gray for footer text */
   font-size: 0.9rem;
 }
+    /* Add these styles to your existing styles.css */
+
+    /* ----- Inventory Detail View Styles ----- */
+    .detail-container {
+      display: flex;
+      flex-direction: column; /* Stack image and info on small screens */
+      gap: 1.5rem; /* Space between image and info */
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #f8f9fa; /* Light background */
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+    }
+
+    .detail-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .detail-info h2 {
+      margin-bottom: 1rem;
+      color: #343a40; /* Dark heading */
+      border-bottom: 2px solid #0056b3; /* Accent color border */
+      padding-bottom: 0.5rem;
+    }
+
+    .detail-info p {
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+
+    .detail-info strong {
+      margin-right: 0.5em; /* Space after label */
+    }
+
+    .detail-price {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #007bff; /* Primary color for price */
+      margin-bottom: 1rem;
+    }
+
+    /* Responsive adjustments for larger screens */
+    @media (min-width: 768px) {
+      .detail-container {
+        flex-direction: row; /* Side-by-side layout */
+        align-items: flex-start; /* Align items to the top */
+      }
+
+      .detail-image {
+        flex-basis: 50%; /* Image takes up half the width */
+        /* Or use flex: 1; */
+      }
+
+      .detail-info {
+        flex-basis: 50%; /* Info takes up the other half */
+        /* Or use flex: 1; */
+        padding-left: 1.5rem; /* Add space between image and text */
+      }
+    }
+
+    /* Add styles for WAVE compliance and Frontend Checklist as needed */
+    /* Ensure good contrast, clear fonts, logical heading structure etc. */
+
+    
 
 /* ----- Media Query for Larger Screens ----- */
 /* Apply styles when screen width is 768px or larger */

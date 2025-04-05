@@ -1,8 +1,9 @@
 <footer>
-  <p>&copy; <span id="currentYear"></span> CSE Motors. All rights reserved.</p>
-  <script>
-    // Simple script to set the current year in the footer
-    document.getElementById("currentYear").textContent = new Date().getFullYear();
-  </script>
-</footer>
-
+    <p>&copy; <span id="currentYear"></span> CSE Motors. All rights reserved.</p>
+    <%# Task 3: Add link to trigger intentional error %>
+    <p><a href="/trigger-error" title="Trigger Intentional Server Error">Trigger 500 Error</a></p>
+    <script>
+      document.getElementById("currentYear").textContent = new Date().getFullYear();
+    </script>
+  </footer>
+  

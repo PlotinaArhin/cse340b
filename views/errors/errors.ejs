@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <style>
+        /* Add specific styles for the error page if needed */
+        .error-message {
+            background-color: #f8d7da; /* Light red background */
+            color: #721c24; /* Dark red text */
+            border: 1px solid #f5c6cb; /* Reddish border */
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <%- include('../partials/header') %>
+        <%- nav %> <main>
+            <h1><%- title %></h1> <div class="error-message">
+                <p><%- message %></p>
+            </div>
+
+            <p><a href="/" title="Go to Homepage">Return to Homepage</a></p>
+
+        </main>
+
+        <%- include('../partials/footer') %>
+    </div>
+</body>
+</html>
