@@ -26,7 +26,7 @@ app.set("view engine", "ejs");
 // Use express-ejs-layouts middleware
 app.use(expressLayouts);
 // Set the default layout file
-app.set("layout", "./layouts/layout"); // assumes views/layouts/layout.ejs
+app.set("layout", "./layout/layout"); // assumes views/layouts/layout.ejs
 // Set the directory for view templates
 app.set("views", path.join(__dirname, "views"));
 
