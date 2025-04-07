@@ -6,7 +6,7 @@
 const express = require("express");
 const router = new express.Router(); // Create an Express router
 const invController = require("../controllers/inventoryController"); // Import inventory controller
-const utilities = require("../utilities/"); // Import utilities
+const utilities = require("../utilities"); // Import utilities
 
 // Route to build inventory by classification view
 // (You likely have this already)
