@@ -11,8 +11,8 @@ const utilities = require("./utilities");
 const baseController = require("./controllers/baseController");
 
 // Routes
-const inventoryRoute = require("./routes/inventoryRoute");
-const errorRoute = require("./routes/errorRoute");
+const inventoryRoute = require("./routes/inventoryroute");
+const errorRoute = require("./routes/errorroute");
 
 // Middleware
 app.use(express.json());
