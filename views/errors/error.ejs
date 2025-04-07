@@ -1,14 +1,11 @@
-<%# views/errors/error.ejs %>
+<%- include('../partials/header', { title }) %>
 
-<%# Use the title passed from the error handler %>
-<h1><%= title %></h1>
+<div class="error-container">
+  <h1><%= title %></h1>
+  <div class="error-message"><%= message %></div>
+  <% if (stack) { %>
+    <pre class="error-stack"><%= stack %></pre>
+  <% } %>
+</div>
 
-<%# Display the error message %>
-<p><%= message %></p>
-
-<%# Optional: Display stack trace in development mode for debugging %>
-<% if (process.env.NODE_ENV !== 'production' && error && error.stack) { %>
-  <hr>
-  <h2>Developer Info (Stack Trace)</h2>
-  <pre><%= error.stack %></pre>
-<% } %>
+<%- include('../partials/footer') %>

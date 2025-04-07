@@ -1,14 +1,7 @@
-<%# views/inventory/detail.ejs %>
+<%- include('../partials/header', { title }) %>
 
-<%# The title is set dynamically in the controller %>
-<%# The navigation (nav) is also passed from the controller %>
+<div class="content-container">
+  <%- detailHTML %>
+</div>
 
-<% if (detailHTML) { %>
-  <%- detailHTML %> <%# Output the pre-rendered HTML from the utility function %>
-<% } else { %>
-  <p class="notice">Vehicle details could not be loaded.</p>
-<% } %>
-
-<%# Add a link back to the classification view or home if needed %>
-<%# Example: <a href="/">Back to Home</a> %>
-
+<%- include('../partials/footer') %>

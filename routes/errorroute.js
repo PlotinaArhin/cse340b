@@ -1,15 +1,11 @@
-/* ***********************
- * Error Trigger Route
- * routes/errorRoute.js
- *************************/
-// Needed Resources
 const express = require("express");
-const router = new express.Router(); // Create an Express router
-const errorController = require("../controllers/errorcontroller"); // Import error controller
-const utilities = require("../utilities"); // Import utilities (for handleErrors)
+const router = express.Router();
 
-// Route to trigger an intentional server error
-// Task 3 Requirement
-router.get("/trigger", utilities.handleErrors(errorController.triggerError));
+// Route to trigger intentional error (Task 3)
+router.get("/trigger", (req, res, next) => {
+  const err = new Error("Intentional 500 Error - Test");
+  err.status = 500;
+  next(err);
+});
 
-module.exports = router; // Export the router
+module.exports = router;
