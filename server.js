@@ -1,89 +1,100 @@
-    /* ***********************
-     * Require Statements
-     * *************************/
-    const express = require("express");
-    const expressLayouts = require("express-ejs-layouts");
-    const env = require("dotenv").config();
-    const app = express();
-    const staticRoutes = require("./routes/static");
-    const inventoryRoute = require("./routes/inventoryRoute"); // Make sure you require your inventory routes
-    const baseController = require("./controllers/baseController");
-    const utilities = require("./utilities/"); // Make sure utilities are required
+/* ***********************
+ * Requires Statements
+ *************************/
+// Load environment variables from .env file
+require('dotenv').config();
+// Import the Express framework
+const express = require("express");
+// Import path module for working with file and directory paths
+const path = require("path");
+// Import express-ejs-layouts for layout support
+const expressLayouts = require("express-ejs-layouts");
+// Create an Express application instance
+const app = express();
+// Import utility functions (assuming you have utilities/index.js)
+const utilities = require("./utilities"); // Make sure this path is correct
+// Import route files
+const baseController = require("./controllers/baseController"); // Assuming you might use this later
+const inventoryRoute = require("./routes/inventoryroute"); // Import inventory routes
+const errorRoute = require("./routes/errorRoute"); // Import the new error trigger route
 
-    /* ***********************
-     * View Engine and Templates
-     * *************************/
-    app.set("view engine", "ejs");
-    app.use(expressLayouts);
-    app.set("layout", "./layouts/layout");
-    app.set("views", "./views");
+/* ***********************
+ * View Engine and Templates
+ *************************/
+// Set EJS as the view engine
+app.set("view engine", "ejs");
+// Use express-ejs-layouts middleware
+app.use(expressLayouts);
+// Set the default layout file
+app.set("layout", "./layouts/layout"); // assumes views/layouts/layout.ejs
+// Set the directory for view templates
+app.set("views", path.join(__dirname, "views"));
 
-    /* ***********************
-     * Middleware
-     * *************************/
-    app.use(express.static("public"));
+/* ***********************
+ * Middleware
+ *************************/
+// Serve static files (CSS, images, client-side JS) from the 'public' directory
+// This needs to come BEFORE routes that might use static files
+app.use(express.static(path.join(__dirname, "public")));
 
-    /* ***********************
-     * Routes
-     * *************************/
-    app.use(staticRoutes);
-    // Index route
-    app.get("/", utilities.handleErrors(baseController.buildHome));
-    // Inventory routes
-    app.use("/inv", inventoryRoute); // Use the inventory routes
+/* ***********************
+ * Routes
+ *************************/
+// Index route - using buildHome method from baseController
+// The assignment implies dynamic navigation, likely handled by utilities.buildNavigation
+// which might be called within controllers or passed directly here.
+// We'll pass the utilities.buildNavigation result to the view.
+app.get("/", utilities.handleErrors(baseController.buildHome));
 
-    // Intentional Error Trigger Route - Task 3 [cite: 18, 20]
-    app.get("/trigger-error", (req, res, next) => {
-      // Intentionally throw an error
-      // The error handling middleware below will catch this
-      next(new Error("Oh no! Intentional Server Error triggered!"));
-    });
+// Inventory routes
+app.use("/inv", utilities.handleErrors(inventoryRoute));
+
+// Intentional Error Trigger Route
+app.use("/error", utilities.handleErrors(errorRoute));
+
+// File Not Found Route - MUST be last route before error handler
+// This middleware catches any requests that didn't match previous routes
+app.use(async (req, res, next) => {
+  // Create a new Error object for the 404
+  const err = new Error("File Not Found");
+  err.status = 404;
+  // Pass the error to the next middleware (the error handler)
+  next(err);
+});
+
+/* ***********************
+ * Express Error Handler
+ *************************/
+/* Place after all routes and other middleware */
+// This middleware takes 4 arguments, indicating it's an error handler
+app.use(async (err, req, res, next) => {
+  // Get the navigation bar HTML (assuming buildNavigation exists in utilities)
+  let nav = await utilities.buildNavigation(); // Ensure buildNavigation is async if it fetches data
+  // Determine the error message and status code
+  const message = err.message || 'Oh no! Something went wrong.';
+  const status = err.status || 500; // Default to 500 Internal Server Error
+  // Log the error to the console (optional, good for debugging)
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+  console.error(err.stack); // Log the stack trace for detailed debugging
+
+  // Render the dedicated error view
+  res.status(status).render("errors/error", {
+    title: status === 404 ? "404 - Page Not Found" : "Server Error",
+    message,
+    nav, // Pass nav data to the error view so the header still works
+    // Optional: Only pass the full error object in development
+    error: process.env.NODE_ENV !== 'production' ? err : null
+  });
+});
 
 
-    /* ***********************
-     * Error Handling Middleware
-     * *************************/
-    // File Not Found Route - must be last route prior to error handler [cite: 16]
-    // Make sure this uses the '*' wildcard and is placed correctly
-    app.use(async (req, res, next) => {
-      const err = new Error("File Not Found");
-      err.status = 404;
-      next(err); // Pass the 404 error to the general error handler
-    });
+/* ***********************
+ * Server Activation
+ *************************/
+// Define the port the server will listen on.
+const port = process.env.PORT || 3000;
+// Start the server and listen on the specified port
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});
 
-    // Express Error Handler - Must be the very last middleware [cite: 16, 52]
-    // This handles all errors passed via next(err)
-    app.use(async (err, req, res, next) => {
-      let nav = await utilities.getNav(); // Get nav for the error page
-      console.error(`Error at: "${req.originalUrl}": ${err.message}`);
-      // Determine the message to display
-      let message;
-      if (err.status == 404) {
-        message = err.message; // Use the specific 404 message
-      } else {
-        // For 500 or other errors
-        message = 'Oh no! There was a crash. Maybe try a different route?';
-      }
-      // Render the error view
-      res.render("errors/error", { // Ensure you have views/errors/error.ejs
-        title: err.status || 'Server Error', // Use error status or default title
-        message,
-        nav, // Pass nav to the error view
-        // Do not pass the full 'err' object in production for security reasons
-      });
-    });
-
-
-    /* ***********************
-     * Local Server Information
-     * *************************/
-    const port = process.env.PORT || 3000;
-    const host = process.env.HOST || 'localhost';
-
-    /* ***********************
-     * Log statement to confirm server operation
-     * *************************/
-    app.listen(port, () => {
-      console.log(`app listening on ${host}:${port}`);
-    });
-    

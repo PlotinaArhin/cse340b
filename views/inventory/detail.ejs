@@ -1,15 +1,14 @@
-<%# Content for the Vehicle Detail View %>
+<%# views/inventory/detail.ejs %>
 
-<% if (errors && errors.length > 0) { %>
-  <ul class="notice">
-  <% errors.forEach(error => { %>
-    <li><%= error.msg %></li>
-  <%  }) %>
-  </ul>
+<%# The title is set dynamically in the controller %>
+<%# The navigation (nav) is also passed from the controller %>
+
+<% if (detailHTML) { %>
+  <%- detailHTML %> <%# Output the pre-rendered HTML from the utility function %>
+<% } else { %>
+  <p class="notice">Vehicle details could not be loaded.</p>
 <% } %>
 
-<%# The detailGrid variable holds the HTML built by the utility function %>
-<%- detailGrid %>
-
-<%# Add any other specific content for the detail page if needed %>
+<%# Add a link back to the classification view or home if needed %>
+<%# Example: <a href="/">Back to Home</a> %>
 

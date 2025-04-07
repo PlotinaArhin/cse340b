@@ -1,9 +1,10 @@
+<%# views/partials/footer.ejs %>
 <footer>
-    <p>&copy; <span id="currentYear"></span> CSE Motors. All rights reserved.</p>
-    <%# Task 3: Add link to trigger intentional error %>
-    <p><a href="/trigger-error" title="Trigger Intentional Server Error">Trigger 500 Error</a></p>
-    <script>
-      document.getElementById("currentYear").textContent = new Date().getFullYear();
-    </script>
-  </footer>
-  
+  <hr>
+  <p>&copy; <%= new Date().getFullYear() %> CSE Motors, All rights reserved.</p>
+
+  <%# Task 3 Requirement: Add link to trigger intentional error %>
+  <a href="/error/trigger" title="Trigger Intentional Error" class="error-trigger-link">Test 500 Error</a>
+
+  <%# Add any other footer content you have %>
+</footer>

@@ -1,0 +1,14 @@
+<%# views/errors/error.ejs %>
+
+<%# Use the title passed from the error handler %>
+<h1><%= title %></h1>
+
+<%# Display the error message %>
+<p><%= message %></p>
+
+<%# Optional: Display stack trace in development mode for debugging %>
+<% if (process.env.NODE_ENV !== 'production' && error && error.stack) { %>
+  <hr>
+  <h2>Developer Info (Stack Trace)</h2>
+  <pre><%= error.stack %></pre>
+<% } %>
