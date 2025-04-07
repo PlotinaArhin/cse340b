@@ -15,7 +15,7 @@ const app = express();
 const utilities = require("./utilities"); // Make sure this path is correct
 // Import route files
 const baseController = require("./controllers/baseController"); // Assuming you might use this later
-const inventoryRoute = require("./routes/inventoryroute"); // Import inventory routes
+const inventoryRoute = require("./routes/inventoryRoute");// Import inventory routes
 const errorRoute = require("./routes/errorroute"); // Import the new error trigger route
 
 /* ***********************
