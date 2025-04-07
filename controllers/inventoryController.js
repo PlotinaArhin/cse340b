@@ -3,7 +3,7 @@
  * controllers/inventoryController.js
  *************************/
 const invModel = require("../models/inventory-model"); // Import inventory model
-const utilities = require("../utilities/"); // Import utilities
+const utilities = require("../utilities"); // Import utilities
 
 const invCont = {}; // Create an object to hold controller functions
 

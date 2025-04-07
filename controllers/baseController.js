@@ -2,7 +2,7 @@
  * Base Controller
  * controllers/baseController.js
  *************************/
-const utilities = require("../utilities/"); // Import utilities to use buildNavigation
+const utilities = require("../utilities"); // Import utilities to use buildNavigation
 const baseController = {}; // Create an object to hold controller functions
 
 /* ***************************
