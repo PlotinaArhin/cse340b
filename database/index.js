@@ -1,42 +1,42 @@
-const { Pool } = require("pg")
-require("dotenv").config()
+const { Pool } = require("pg");
+require("dotenv").config();
+
 /* **************
  * Connection Pool
- * SSL Object needed for local testing of app
- * But will cause problems in production environment // <= Note: This comment might now be misleading if production ALSO needs SSL.
- * If - else will make determination which to use
+ * SSL Object needed for both environments but with different configurations
  * ************** */
-let pool
-if (process.env.NODE_ENV == "development") {
+let pool;
+if (process.env.NODE_ENV === "development") {
+    // Development configuration with relaxed SSL settings
     pool = new Pool({
         connectionString: process.env.DATABASE_URL,
-        ssl: { // <- Already present for development
-            rejectUnauthorized: false,
+        ssl: {
+            rejectUnauthorized: false, // For local/dev testing only
         },
-    })
+    });
 
-    // Added for troubleshooting queries
-    // during development
+    // Add troubleshooting queries
     module.exports = {
         async query(text, params) {
             try {
-                const res = await pool.query(text, params)
-                console.log("executed query", { text })
-                return res
+                const res = await pool.query(text, params);
+                console.log("executed query", { text });
+                return res;
             } catch (error) {
-                console.error("error in query", { text })
-                throw error
+                console.error("error in query", { text });
+                throw error;
             }
         },
-    }
-} else { // This block runs for non-development environments
+    };
+} else {
+    // Production configuration with secure SSL settings
     pool = new Pool({
         connectionString: process.env.DATABASE_URL,
-        // --- Correction is added here ---
         ssl: {
-            rejectUnauthorized: false, // Add this line as instructed for non-dev environments too
+            rejectUnauthorized: true, // Verify SSL certificate
+            // For added security, include your CA certificate here:
+            // ca: process.env.CA_CERT 
         },
-        // ---------------------------------
-    })
-    module.exports = pool
+    });
+    module.exports = pool;
 }
