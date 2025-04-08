@@ -1,72 +1,43 @@
-<%# Wrap the main content in a container for easier styling %>
-<div class="hero-section">
-  <h1>Welcome to CSE Motors!</h1>
-
-  <%# Delorean Feature Section %>
-  <div class="delorean-feature">
-    <div class="delorean-info">
-      <h2>DMC Delorean</h2>
-      <ul>
-        <li>3 Cup holders</li>
-        <li>Superman doors</li>
-        <li>Fuzzy dice!</li>
-      </ul>
-      <button class="cta-button">Own Today</button>
-    </div>
-    <div class="delorean-image">
-      <%# Assume delorean.jpg is in public/images %>
-      <img src="/images/delorean.jpg" alt="Image of a DMC Delorean car">
-    </div>
-  </div>
-</div>
-
-<%# Main content area with Reviews and Upgrades %>
-<div class="content-area">
-  <%# Delorean Reviews Section %>
-  <section class="reviews">
-    <h2>DMC Delorean Reviews</h2>
-    <ul>
-      <li>"So fast it's almost like traveling in time." (4/5)</li>
-      <li>"Coolest ride on the road." (4/5)</li>
-      <li>"I'm feeling McFly!" (5/5)</li>
-      <li>"The most futuristic ride of our day." (4.5/5)</li>
-      <li>"80's livin and I love it!" (5/5)</li>
-    </ul>
-  </section>
-
-  <%# Delorean Upgrades Section %>
-  <section class="upgrades">
-    <h2>Delorean Upgrades</h2>
-    <div class="upgrade-grid">
-      <div class="upgrade-item">
-        <%# Assume flux-cap.png is in public/images/upgrades %>
-        <div class="upgrade-image-container">
-           <img src="/images/upgrades/flux-cap.png" alt="Flux capacitor icon">
+<div id="homePage">
+    <h1>Welcome to CSE Motors!</h1>
+    <%- messages() %>
+    <div class="hero">
+        <img src="images/vehicles/delorean.jpg" alt="Delorean" width="200" height="100">
+        <div class="hero-info">
+            <h2>DMC Delorean</h2>
+            <p>3 Cup holders</p>
+            <p>Superman doors</p>
+            <p>Fuzzy dice!</p>
+            <p><span class="own-today">Own Today</span></p>
         </div>
-        <a href="#" title="View Flux Capacitor upgrade (Placeholder)">Flux Capacitor</a>
-      </div>
-      <div class="upgrade-item">
-        <%# Assume flame.jpg is in public/images/upgrades %>
-         <div class="upgrade-image-container">
-           <img src="/images/upgrades/flame.jpg" alt="Flame decal icon">
-         </div>
-        <a href="#" title="View Flame Decals upgrade (Placeholder)">Flame Decals</a>
-      </div>
-      <div class="upgrade-item">
-        <%# Assume bumper.png is in public/images/upgrades %>
-         <div class="upgrade-image-container">
-           <img src="/images/upgrades/bumper.png" alt="Bumper sticker icon">
-         </div>
-        <a href="#" title="View Bumper Stickers upgrade (Placeholder)">Bumper Stickers</a>
-      </div>
-      <div class="upgrade-item">
-        <%# Assume hub-cap.png is in public/images/upgrades %>
-         <div class="upgrade-image-container">
-           <img src="/images/upgrades/hub-cap.png" alt="Hub cap icon">
-         </div>
-        <a href="#" title="View Hub Caps upgrade (Placeholder)">Hub Caps</a>
-      </div>
     </div>
-  </section>
+    <div class="reviews">
+        <h2>DMC Delorean Reviews</h2>
+        <ul>
+            <li>"So fast it's almost like traveling in time." (4/5)</li>
+            <li>"Coolest ride on the road." (4/5)</li>
+            <li>"I'm feeling McFly! (5/5)</li>
+            <li>"The most futuristic ride of our day." (4.5/5)</li>
+            <li>"80's livin and love it!" (5/5)</li>
+        </ul>
+    </div>
+    <div class="upgrades">
+        <h2>Delorean Upgrades</h2>
+        <figure>
+            <span><img src="images/upgrades/flux-cap.png" alt="Flux Capacitor" width="50" height="50"></span>
+            <figcaption>Flux Capacitor</figcaption>
+        </figure>
+        <figure>
+            <span><img src="images/upgrades/flame.jpg" alt="Flame Decals" width="50" height="50"></span>
+            <figcaption>Flame Decals</figcaption>
+        </figure>
+        <figure>
+            <span><img src="images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers" width="50" height="50"></span>
+            <figcaption>Bumper Stickers</figcaption>
+        </figure>
+        <figure>
+            <span><img src="images/upgrades/hub-cap.jpg" alt="Hub Caps" width="50" height="50"></span>
+            <figcaption>Hub Caps</figcaption>
+        </figure>
+    </div>
 </div>
-

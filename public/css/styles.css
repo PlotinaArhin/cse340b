@@ -1,372 +1,419 @@
-/* Reset some default styles */
+/******* Change Box Model ***************/
 *,
-*::before,
-*::after {
+*:before,
+*:after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-/* Use a more modern font stack - choose professional fonts */
-/* Example using system fonts and common sans-serif */
+/*****************************************
+*    VARIABLES
+******************************************/
+
+:root {
+  --primary-color: #AADDFF;
+  --secondary-color: #000000;
+  --accent-color: #C6878F;
+  --header-font: "Oswald", sans-serif;
+  --body-font: "Inter", sans-serif;
+}
+
+/*****************************************
+*    COMMON
+******************************************/
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height: 1.6;
-  background-color: #f8f9fa; /* Light gray background */
-  color: #343a40; /* Dark gray text */
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure footer stays at bottom */
+  margin: 0;
+  font-family: var(--body-font);
 }
 
-/* Site wrapper for sticky footer if needed */
-.site-wrapper {
-  flex: 1; /* Allows footer to push down */
-  max-width: 1200px; /* Max width for content */
-  margin: 0 auto; /* Center the content */
-  padding: 0 1rem; /* Padding on the sides */
+h1,
+h2,
+h3 {
+  font-family: var(--header-font);
+  margin: 1rem;
+}
+
+p {
+  margin: 1rem;
+}
+
+img {
   width: 100%;
-  background-color: #ffffff; /* White background for content area */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/* ----- Header Styles ----- */
-#top-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid #dee2e6; /* Light border */
-}
-
-.siteName a {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #0056b3; /* Professional blue */
-  text-decoration: none;
-}
-
-.tools a {
-  text-decoration: none;
-  color: #0056b3;
-  font-weight: 500;
-}
-
-.tools a:hover {
-  text-decoration: underline;
-}
-
-/* ----- Navigation Styles ----- */
-nav {
-  background-color: #343a40; /* Dark background for nav */
-  padding: 0.5rem 0;
-  margin-bottom: 1.5rem;
-}
-
-.navigation {
-  list-style: none;
-  display: flex;
-  flex-direction: column; /* Stack vertically on mobile */
-  align-items: center;
-}
-
-.navigation li {
-  margin: 0.5rem 0;
-}
-
-.navigation a {
-  color: #ffffff; /* White text */
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  display: block;
-  transition: background-color 0.2s ease;
-}
-
-.navigation a:hover,
-.navigation a:focus {
-  background-color: #495057; /* Slightly lighter dark on hover */
-  border-radius: 4px; /* Rounded corners on hover */
-}
-
-/* ----- Main Content Styles ----- */
-main {
-  padding: 1rem 0; /* Padding around main content */
-}
-
-/* Hero Section (Welcome + Delorean Feature) */
-.hero-section {
-  text-align: center;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background-color: #e9ecef; /* Light background for hero */
-  border-radius: 8px; /* Rounded corners */
-}
-
-.hero-section h1 {
-  margin-bottom: 1.5rem;
-  color: #212529; /* Darker heading */
-}
-
-.delorean-feature {
-  display: flex;
-  flex-direction: column; /* Stack image and text on mobile */
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.delorean-info {
-  text-align: left;
-}
-
-.delorean-info h2 {
-  margin-bottom: 0.5rem;
-  color: #0056b3;
-}
-
-.delorean-info ul {
-  list-style: disc;
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.delorean-image img {
-  max-width: 100%;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cta-button {
-  background-color: #007bff; /* Primary blue button */
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  display: inline-block; /* Allow text-align center to work */
-  margin-top: 1rem; /* Space above button */
+a {
+  text-decoration: none;
+  color: black;
 }
 
-.cta-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+.link {
+  text-decoration: underline;
+  color: blue;
 }
 
-/* Content Area (Reviews & Upgrades) */
-.content-area {
-  display: flex;
-  flex-direction: column; /* Stack sections on mobile */
-  gap: 2rem; /* Space between sections */
+.notice {
+  color: red;
+  font-style: italic;
 }
 
-.reviews,
-.upgrades {
-  background-color: #f8f9fa; /* Slightly off-white background */
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid #dee2e6;
-}
-
-.reviews h2,
-.upgrades h2 {
-  margin-bottom: 1rem;
-  text-align: center;
-  color: #495057; /* Gray heading */
-}
-
-.reviews ul {
-  list-style: none; /* Remove default bullets */
-}
-
-.reviews li {
-  margin-bottom: 0.5rem;
-  padding-left: 1.2rem; /* Indent for custom bullet */
-  position: relative;
-}
-
-/* Custom bullet effect */
-.reviews li::before {
-  content: '✔'; /* Checkmark or other symbol */
-  position: absolute;
-  left: 0;
-  color: #28a745; /* Green color for checkmark */
-}
-
-/* Upgrades Grid */
-.upgrade-grid {
+form {
+  border: 1px solid black;
+  border-radius: .5rem;
+  padding: 1rem;
+  margin: 1rem auto;
   display: grid;
-  /* On mobile, maybe 1 or 2 columns */
-  grid-template-columns: repeat(2, 1fr); /* Two columns */
-  gap: 1.5rem;
-  text-align: center;
+  max-width: 500px;
 }
 
-.upgrade-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+label,
+input,
+textarea,
+select {
+  margin: .5rem;
 }
 
-.upgrade-image-container {
-  background-color: #0056b3; /* Blue background for image */
+input,
+textarea,
+select {
+  padding: .5rem;
+  margin-top: 0;
+  border: 1px solid rgba(0, 0, 0, .3);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, .2);
+}
+
+input:required:invalid:focus,
+textarea:required:invalid:focus,
+select:required:invalid:focus {
+  background-color: #ffb9b9;
+}
+
+input:required:valid,
+textarea:required:valid,
+select:required:valid {
+  background-color: #cefdce;
+}
+
+textarea {
+  height: 75px;
+}
+
+select {
+  padding: .5rem;
+}
+
+button[type="submit"] {
+  width: 50%;
+  padding: .5rem;
+  margin: 1rem auto;
+}
+
+/*****************************************
+*    Table
+******************************************/
+table {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+tr {
+  background-color: #eee;
+}
+
+td {
+  padding: .5rem;
+}
+
+#classificationSelect {
+  margin: .5rem;
+}
+
+/*****************************************
+*    HEADER
+******************************************/
+header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin: auto 0;
+  background-color: var(--primary-color);
   padding: 1rem;
-  border-radius: 8px; /* Rounded corners */
-  width: 80px; /* Fixed width */
-  height: 80px; /* Fixed height */
+}
+
+header span {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+header div {
+  margin: auto 0;
+}
+
+header div a {
+  display: block;
+  text-align: right;
+}
+
+/*****************************************
+*    NAVIGATION
+******************************************/
+nav ul {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.5rem; /* Space below image */
+  justify-content: space-evenly;
+  background-color: var(--primary-color);
+  margin: 0;
+  padding: 1rem;
 }
 
-.upgrade-item img {
-  max-width: 100%;
-  max-height: 100%;
-  height: auto;
-  display: block; /* Remove extra space below image */
-}
-
-.upgrade-item a {
-  color: #0056b3;
-  text-decoration: none;
+nav ul li {
+  list-style: none;
   font-weight: 500;
 }
 
-.upgrade-item a:hover {
-  text-decoration: underline;
+/*****************************************
+*    INDEX
+******************************************/
+.hero {
+  display: grid;
+  font-weight: 700;
 }
 
+.hero img {
+  grid-column: 1/3;
+  grid-row: 1/2;
+}
 
-/* ----- Footer Styles ----- */
-footer {
+.hero-info {
+  color: var(--accent-color);
+  background-color: rgba(0, 0, 0, .7);
+  border-radius: .5rem;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  margin: 1rem;
+  padding: .5rem;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.hero-info h2 {
+  margin: .5rem;
+}
+
+.hero-info p {
+  margin: .3rem .5rem .3rem .5rem
+}
+
+.own-today {
+  display: block;
+  color: var(--secondary-color);
+  background-color: var(--accent-color);
+  padding: .5rem;
+  border-radius: .5rem;
+  font-weight: 700;
   text-align: center;
-  padding: 1.5rem 0;
-  margin-top: 2rem; /* Space above footer */
-  border-top: 1px solid #dee2e6;
-  color: #6c757d; /* Lighter gray for footer text */
-  font-size: 0.9rem;
 }
 
-/* ----- Media Query for Larger Screens ----- */
-/* Apply styles when screen width is 768px or larger */
-@media (min-width: 768px) {
-  /* Make navigation horizontal */
-  .navigation {
-    flex-direction: row;
-    justify-content: center; /* Center nav items */
+.reviews ul li {
+  margin-top: 1rem;
+}
+
+.upgrades {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.upgrades h2 {
+  grid-column: 1/3;
+}
+
+.upgrades figure {
+  width: 90%;
+  margin: 0 auto;
+  padding: .5rem;
+  text-align: center;
+}
+
+.upgrades span {
+  background-color: var(--accent-color);
+  display: block;
+  padding: .3rem;
+  min-height: 100px;
+}
+
+.upgrades img {
+  width: 50%;
+}
+
+.upgrades figcaption {
+  font-weight: 500;
+}
+
+/*****************************************
+*    Inventory Index View
+******************************************/
+#inv-display {
+  padding: 1rem;
+}
+
+#inv-display li {
+  margin: 1rem auto;
+  list-style-type: none;
+  border: 1px solid black;
+  border-radius: .5rem;
+  max-width: 500px;
+}
+
+#inv-display img {
+  width: 100%;
+  border-radius: .5rem;
+}
+
+#inv-display hr {
+  height: .5rem;
+  background-color: black;
+}
+
+.namePrice span {
+  display: block;
+  padding: 1rem;
+}
+
+/*****************************************
+*    Vehicle Details View
+******************************************/
+.vehicle-details img {
+  padding: 1rem;
+}
+
+.vehicle-details-title {
+  font-weight: 700;
+}
+
+.review {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 1rem;
+  padding-bottom: 1rem;
+  background-color: #eee;
+  border-radius: .5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, .3);
+}
+
+.review p {
+  grid-column: 1/3;
+}
+
+.label {
+  font-weight: 700;
+}
+
+.review-details {
+  font-size: .8rem;
+  margin: 0 1rem;
+}
+
+.updateDeleteReview {
+  display: flex;
+  justify-content: right;
+  grid-column: 2/3;
+}
+
+.updateDeleteReview a {
+  display: block;
+  padding: 1rem;
+}
+
+#addReview {
+  width: 80%;
+  max-width: none;
+}
+
+/*****************************************
+*    Login View
+******************************************/
+.registration-link {
+  text-align: center;
+}
+
+.login-form a {
+  text-decoration: underline;
+  color: blue;
+}
+
+/*****************************************
+*    Account Management
+******************************************/
+#accountManagement a {
+  text-decoration: underline;
+  color: blue;
+}
+
+/*****************************************
+*    FOOTER
+******************************************/
+.error-link {
+  display: block;
+  margin: 1rem;
+  text-decoration: underline;
+  color: blue;
+}
+
+/*****************************************
+*    CSS styles for larger screens
+******************************************/
+@media screen and (min-width: 900px) {
+  /*****************************************
+  *    COMMON
+  ******************************************/
+  html {
+    background-image: url("../images/site/checkerboard.jpg");
   }
 
-  .navigation li {
-    margin: 0 1rem; /* Space between horizontal items */
+  body {
+    background-color: white;
+    border: 5px solid var(--primary-color);
+    border-radius: .5rem;
+    max-width: 900px;
+    margin: 1rem auto;
   }
 
-  /* Arrange Delorean feature side-by-side */
-  .delorean-feature {
-    flex-direction: row; /* Side-by-side */
-    text-align: left; /* Align text left on larger screens */
-    align-items: flex-start; /* Align items to the top */
+  /*****************************************
+  *    INDEX
+  ******************************************/
+  #homePage {
+    display: grid;
   }
 
-  .delorean-info {
-     flex: 1; /* Allow text to take available space */
-     order: 1; /* Keep text on the left */
-     padding-right: 1rem; /* Add some space */
-  }
-
-   .delorean-image {
-     flex-basis: 45%; /* Control image width */
-     order: 2; /* Keep image on the right */
-     text-align: right; /* Align image container content */
-   }
-
-   .delorean-image img {
-     max-width: 100%; /* Ensure image scales */
-   }
-
-   .hero-section {
-     text-align: left; /* Align hero heading left */
-   }
-
-   .cta-button {
-     margin-top: 1.5rem;
-   }
-
-  /* Arrange content area side-by-side */
-  .content-area {
-    flex-direction: row; /* Side-by-side */
-    align-items: flex-start; /* Align tops of sections */
+  #homePage h1,
+  .hero {
+    grid-column: 1/3;
   }
 
   .reviews {
-    flex: 1; /* Take up half the space */
-    order: 1; /* Reviews first */
+    grid-row: 3/4;
+    grid-column: 2/3;
   }
 
   .upgrades {
-    flex: 1; /* Take up half the space */
-    order: 2; /* Upgrades second */
+    grid-row: 3/4;
+    grid-column: 1/2;
   }
 
-  /* Adjust upgrade grid for larger screens */
-  .upgrade-grid {
-    /* Keep 2 columns or maybe go to 4 */
-     grid-template-columns: repeat(2, 1fr); /* Or repeat(4, 1fr) if space allows */
+  /*****************************************
+  *    Inventory Index View
+  ******************************************/
+  #inv-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr
   }
-}
 
-/* ----- Accessibility Considerations ----- */
-/* Ensure focus states are visible */
-a:focus,
-button:focus {
-  outline: 2px solid #0056b3; /* Visible focus outline */
-  outline-offset: 2px;
-}
+  #inv-display li {
+    width: 250px;
+  }
 
-/* Add skip link for keyboard navigation (optional but good practice) */
-.skip-link {
-  position: absolute;
-  top: -40px; /* Hide off-screen */
-  left: 0;
-  background: #000;
-  color: white;
-  padding: 8px;
-  z-index: 100;
-  transition: top 0.3s ease-in-out;
-}
-
-.skip-link:focus {
-  top: 0; /* Bring into view on focus */
-}
-
-/* Responsive Design */
-.vehicle-detail-grid {
-  display: grid;
-  gap: 2rem;
-  padding: 2rem;
-}
-
-@media (min-width: 768px) {
-  .vehicle-detail-grid {
+  /*****************************************
+  *    Vehicle Details View
+  ******************************************/
+  .vehicle-details {
+    display: grid;
     grid-template-columns: 1fr 1fr;
   }
-}
-
-.vehicle-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.price {
-  color: #2c7a4d;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.error-container {
-  padding: 2rem;
-  text-align: center;
 }

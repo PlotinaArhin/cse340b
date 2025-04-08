@@ -1,11 +1,3 @@
-<%- include('../partials/header', { title }) %>
+<h1><%= title %></h1>
 
-<div class="error-container">
-  <h1><%= title %></h1>
-  <div class="error-message"><%= message %></div>
-  <% if (stack) { %>
-    <pre class="error-stack"><%= stack %></pre>
-  <% } %>
-</div>
-
-<%- include('../partials/footer') %>
+<p><%- message %></p>

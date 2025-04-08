@@ -1,22 +1,14 @@
-const utilities = require("../utilities");
+const utilities = require('../utilities')
+const baseController = {}
 
-const baseController = {
-  buildHome: async (req, res) => {
-    try {
-      const nav = await utilities.getNav();
-      res.render("index", {
-        title: "Home",
-        nav,
-        errors: null,
-      });
-    } catch (error) {
-      next(error);
-    }
-  },
+baseController.buildHome = async function(req, res) {
+    const nav = await utilities.getNav()
+    res.render("index", { title: "Home", nav })
+}
 
-  triggerIntentionalError: async (req, res, next) => {
-    throw new Error("Intentional 500 Error");
-  }
-};
+// Should throw a 500 error because the title and nav are not provided to res.render
+baseController.error500 = async function(req, res) {
+    res.render("index")
+}
 
-module.exports = baseController;
+module.exports = baseController
