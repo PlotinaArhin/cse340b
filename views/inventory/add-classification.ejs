@@ -1,23 +1,26 @@
-<% if (title) { %>
-    <h1><%= title %></h1>
-<% } else {
-    res.redirect('/')
-} %>
-
-<%- messages() %>
-
-<% if (errors) { %>
-    <ul class="notice">
-        <% errors.array().forEach(error => { %>
-            <li><%= error.msg %></li>
-        <% }) %>
-    </ul>
-<% } %>
-
-<form action="/inv/add-classification" method="post">
-    <label for="classification_name">Classification Name:</label>
-    <input type="text" name="classification_name" id="classification_name" required pattern="^[A-Za-z]+$" value="<%= locals.classification_name %>">
-    <p>Name must be alphabetic characters only.</p>
-
-    <button type="submit">Add Classification</button>
-</form>
+<div class="container">
+  <% if (errors) { %>
+  <div class="alert alert-error">
+    <% errors.array().forEach(function(error) { %>
+    <p><%= error.msg %></p>
+    <% }) %>
+  </div>
+  <% } %>
+  <h1>Add Classification</h1>
+  <form action="/inv/add-classification" method="post">
+    <div class="form-control">
+      <label for="classification_name">Classification Name</label>
+      <input
+        type="text"
+        name="classification_name"
+        id="classification_name"
+        required
+        pattern="^[a-zA-Z0-9]+$"
+        title="No spaces or special characters allowed"
+      />
+    </div>
+    <div class="form-control mt-6">
+      <button type="submit" class="btn">Add Classification</button>
+    </div>
+  </form>
+</div>

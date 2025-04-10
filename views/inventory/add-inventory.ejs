@@ -1,50 +1,105 @@
-<% if (title) { %>
-    <h1><%= title %></h1>
-<% } else {
-    res.redirect('/')
-} %>
-
-<%- messages() %>
-
-<% if (errors) { %>
-    <ul class="notice">
-        <% errors.array().forEach(error => { %>
-            <li><%= error.msg %></li>
-        <% }) %>
-    </ul>
-<% } %>
-
-<form action="/inv/add-inventory" method="post">
-    <p>All fields are required.</p>
-    <label for="classification_id">Classification:</label>
-    <%- classificationDropDown %>
-
-    <label for="inv_make">Make:</label>
-    <input type="text" name="inv_make" id="inv_make" required placeholder="Min of 3 characters" value="<%= locals.inv_make %>" minlength="3">
-
-    <label for="inv_model">Model:</label>
-    <input type="text" name="inv_model" id="inv_model" required placeholder="Min of 3 characters" value="<%= locals.inv_model %>" minlength="3">
-
-    <label for="inv_description">Description:</label>
-    <textarea name="inv_description" id="inv_description" required><%= locals.inv_description %></textarea>
-
-    <label for="inv_image">Image:</label>
-    <input type="text" name="inv_image" id="inv_image" required value="/images/vehicles/no-image.png">
-
-    <label for="inv_thumbnail">Thumbnail:</label>
-    <input type="text" name="inv_thumbnail" id="inv_thumbnail" required value="/images/vehicles/no-image.png">
-
-    <label for="inv_price">Price:</label>
-    <input type="number" name="inv_price" id="inv_price" required value="<%= locals.inv_price %>" placeholder="Decimal or integer">
-
-    <label for="inv_year">Year:</label>
-    <input type="number" name="inv_year" id="inv_year" required value="<%= locals.inv_year %>" placeholder="4-digit year" min="1900" max="2099">
-
-    <label for="inv_miles">Miles:</label>
-    <input type="number" name="inv_miles" id="inv_miles" required value="<%= locals.inv_miles %>" placeholder="Digits only">
-
-    <label for="inv_color">Color:</label>
-    <input type="text" name="inv_color" id="inv_color" required value="<%= locals.inv_color %>">
-
-    <button type="submit">Add Vehicle</button>
-</form>
+<div class="container">
+  <% if (errors) { %>
+  <div class="alert alert-error">
+    <% errors.array().forEach(function(error) { %>
+    <p><%= error.msg %></p>
+    <% }) %>
+  </div>
+  <% } %>
+  <h1>Add Inventory Item</h1>
+  <form action="/inv/add-inventory" method="post">
+    <div class="form-control">
+      <label for="classification_id">Classification</label>
+      <%- classifications %>
+    </div>
+    <div class="form-control">
+      <label for="inv_make">Make</label>
+      <input
+        type="text"
+        name="inv_make"
+        id="inv_make"
+        value="<%= inv_make %>"
+        required
+      />
+    </div>
+    <div class="form-control">
+      <label for="inv_model">Model</label>
+      <input
+        type="text"
+        name="inv_model"
+        id="inv_model"
+        value="<%= inv_model %>"
+        required
+      />
+    </div>
+    <div class="form-control">
+      <label for="inv_year">Year</label>
+      <input
+        type="number"
+        name="inv_year"
+        id="inv_year"
+        value="<%= inv_year %>"
+        required
+      />
+    </div>
+    <div class="form-control">
+      <label for="inv_description">Description</label>
+      <textarea name="inv_description" id="inv_description" required>
+<%= inv_description %></textarea
+      >
+    </div>
+    <div class="form-control">
+      <label for="inv_image">Image Path</label>
+      <input
+        type="text"
+        name="inv_image"
+        id="inv_image"
+        value="<%= inv_image %>"
+        required
+      />
+    </div>
+    <div class="form-control">
+      <label for="inv_thumbnail">Thumbnail Path</label>
+      <input
+        type="text"
+        name="inv_thumbnail"
+        id="inv_thumbnail"
+        value="<%= inv_thumbnail %>"
+        required
+      />
+    </div>
+    <div class="form-control">
+      <label for="inv_price">Price</label>
+      <input
+        type="number"
+        name="inv_price"
+        id="inv_price"
+        value="<%= inv_price %>"
+        required
+      />
+    </div>
+    <div class="form-control">
+      <label for="inv_miles">Miles</label>
+      <input
+        type="number"
+        name="inv_miles"
+        id="inv_miles"
+        value="<%= inv_miles %>"
+        required
+      />
+    </div>
+    <div class="form-control">
+      <label for="inv_color">Color</label>
+      <input
+        type="text"
+        name="inv_color"
+        id="inv_color"
+        value="<%= inv_color %>"
+        required
+      />
+    </div>
+    <div class="form-control mt-6">
+      <button type="submit" class="btn">Add Inventory Item</button>
+    </div>
+  </form>
+</div>

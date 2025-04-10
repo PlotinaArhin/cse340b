@@ -1,67 +1,74 @@
-const express = require("express")
-const router = new express.Router()
-const accountController = require("../controllers/accountController")
-const utilities = require("../utilities/")
-const accountValidate = require("../utilities/account-validation")
+const express = require("express");
+const router = express.Router();
+const utilities = require("../utilities/");
+const errorHandlers = require("../middleware/errorHandler");
+const accountController = require("../controllers/accountController");
+const regValidate = require("../utilities/account-validation");
+
+// Route to build account view
+router.get("/login", utilities.handleError(accountController.buildLogin));
+
+// Route to build register view
+router.get("/register", utilities.handleError(accountController.buildRegister));
 
 // Route to account management view
 router.get(
-    "/",
-    utilities.checkLogin,
-    utilities.handleErrors(accountController.buildAccountManagement)
-)
+  "/",
+  utilities.checkLogin,
+  utilities.handleError(accountController.buildManagement)
+);
 
-// Route to update account view
+// Route to build update account view
+router.get("/update", utilities.handleError(accountController.buildUpdateAccount))
+
+//Update Account Type only Admin
 router.get(
-    "/updateAccount",
-    utilities.checkLogin,
-    utilities.handleErrors(accountController.buildUpdateAccount)
-)
+    "/accounttype",
+    utilities.adminType, 
+    utilities.handleError(accountController.buildAccountType))
 
-// Route to build login view
-router.get("/login", utilities.handleErrors(accountController.buildLogin))
+//Logout Account
+router.get("/logout", accountController.logoutAccount)
 
-// Route to logout
+//Update Account Type only Admin
 router.get(
-    "/logout", 
-    utilities.checkLogin,
-    utilities.handleErrors(accountController.accountLogout)
-)
+    "/accounttype",
+    utilities.adminType, 
+    utilities.handleError(accountController.buildAccountType))
 
-// Route to build registration view
-router.get("/registration", utilities.handleErrors(accountController.buildRegistration))
-
-// Post registration info
+// Route to process registration
 router.post(
-    '/registration',
-    accountValidate.registationRules(),
-    accountValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount)
-)
+  "/register",
+  regValidate.registationRules(),
+  regValidate.checkRegData,
+  utilities.handleError(accountController.registerAccount)
+);
 
-// Process the login attempt
+// Route to process login
 router.post(
-    "/login",
-    accountValidate.loginRules(),
-    accountValidate.checkLoginData,
-    utilities.handleErrors(accountController.accountLogin)
-)
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLogData,
+  utilities.handleError(accountController.accountLogin)
+);
 
-// Process update account info
+// Update account from register page
 router.post(
-    "/edit-account",
-    accountValidate.editAccountInfoRules(),
-    accountValidate.checkEditAccountInfoData,
-    utilities.handleErrors(accountController.updateAccountInfo)
-)
+    "/update",
+    regValidate.updateAccountRules(),
+    regValidate.checkUpdAccData, 
+    utilities.handleError(accountController.updateAccount))
 
-// Process update account password
 router.post(
-    "/update-password",
-    accountValidate.updatePasswordRules(),
-    accountValidate.checkPasswordData,
-    utilities.handleErrors(accountController.updatePassword)
+    "/updatetype",
+    utilities.adminType,
+    regValidate.updateTypeRules(),
+    regValidate.checkUpdateTypeData,
+    utilities.handleError(accountController.updateType))
 
-)
 
-module.exports = router
+router.use(utilities.checkJWTToken)
+// Error handler
+router.use(errorHandlers);
+
+module.exports = router;
